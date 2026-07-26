@@ -40,3 +40,7 @@
    npm install date-fns
    npm install smooth-scroll
    npm run dev
+
+# Intrested can Contribute
+   **Frontend
+   **Backend
