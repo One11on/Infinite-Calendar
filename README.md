@@ -36,3 +36,7 @@
    ```bash
    git clone https://github.com/your-username/unlimited-calendar.git
    cd unlimited-calendar
+   npm install
+   npm install date-fns
+   npm install smooth-scroll
+   npm run dev
