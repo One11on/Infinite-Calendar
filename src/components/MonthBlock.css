@@ -1,0 +1,136 @@
+/* src/components/MonthBlock.css */
+.month-mini {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  padding: 0.5rem 0.25rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+  min-width: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.month-mini:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(139, 139, 255, 0.08);
+  transform: scale(1.03);
+}
+
+.month-mini .month-label {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  color: #7a7a92;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.days-mini {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  width: 100%;
+}
+
+.day-mini {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  color: #b0b0c8;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  font-weight: 400;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ===== GLOSSY HOVER EFFECT ON DATES ===== */
+.day-mini:hover {
+  background: radial-gradient(circle at 50% 50%, rgba(139, 139, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 80%);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(139, 139, 255, 0.1);
+  color: #e0e0ff;
+}
+
+/* ===== PERFECT COLOR ALIGNMENT ===== */
+.day-mini.sunday {
+  color: var(--weekend-red) !important;
+}
+.day-mini.friday {
+  color: var(--weekend-purple) !important;
+}
+.day-mini.saturday {
+  color: var(--weekend-blue) !important;
+}
+
+.day-mini.other-month {
+  color: #3a3a4e !important;
+}
+
+.day-mini.today {
+  background: rgba(139, 139, 255, 0.2);
+  color: #d0d0ff !important;
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(139, 139, 255, 0.05);
+}
+
+.day-mini.today::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #8b8bff;
+  opacity: 0.6;
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+/* Event and Holiday Dots */
+.day-mini.has-event {
+  position: relative;
+}
+
+.day-mini.has-event .event-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #8b8bff;
+  box-shadow: 0 0 8px rgba(139, 139, 255, 0.3);
+}
+
+.day-mini.has-holiday .holiday-dot {
+  position: absolute;
+  bottom: 1px;
+  left: 1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.3);
+}
+
+.day-mini.has-event.has-holiday .event-dot {
+  bottom: 5px;
+}
+
+.day-mini.has-event.has-holiday .holiday-dot {
+  bottom: 5px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.3; transform: translateX(-50%) scale(0.8); }
+  50% { opacity: 0.8; transform: translateX(-50%) scale(1.2); }
+}

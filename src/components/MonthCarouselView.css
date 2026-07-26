@@ -1,0 +1,274 @@
+/* src/components/MonthCarouselView.css */
+.month-carousel-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.month-carousel-container {
+  width: 95vw;
+  max-width: 1500px;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== WIDER SIDE PANELS (Changed 0.9fr -> 1.2fr) ===== */
+.month-carousel-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 2.5fr 1.2fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.month-carousel-card {
+  height: 90%;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border-radius: 28px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 60px var(--shadow-color);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === Side Panels === */
+.side-month-card {
+  background: rgba(255, 255, 255, 0.03);
+  opacity: 0.6;
+  transform: scale(0.92);
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.side-month-card:hover {
+  opacity: 0.9;
+  transform: scale(0.95);
+}
+
+.side-month-content {
+  padding: 1.2rem 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.side-month-label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.side-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.side-day {
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.side-day.empty {
+  visibility: hidden;
+}
+
+/* ===== COLORS FOR THE SIDE PANELS ===== */
+.side-day.sunday {
+  color: #f87171 !important;
+}
+.side-day.saturday {
+  color: #60a5fa !important;
+}
+.side-day.friday {
+  color: #a78bfa !important;
+}
+
+/* === Center Panel === */
+.center-month-card {
+  background: var(--bg-glass);
+  transform: scale(1.04);
+  border: 1px solid var(--border-active);
+  z-index: 10;
+  height: 95%;
+}
+
+.center-month-content {
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-month-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.center-month-label {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.month-nav-arrow {
+  background: rgba(139, 139, 255, 0.15);
+  border: 1px solid rgba(139, 139, 255, 0.2);
+  color: var(--text-main);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.month-nav-arrow:hover:not(:disabled) {
+  background: rgba(139, 139, 255, 0.35);
+  transform: scale(1.1);
+}
+
+.month-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+.month-weekday-label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ===== FIXED GRID FOR CENTER ===== */
+.center-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  flex: 1;
+  align-content: stretch;
+}
+
+.center-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  min-height: 40px;
+  background: var(--bg-glass-light);
+}
+
+/* ===== GLOSSY HOVER EFFECT ON DATES ===== */
+.center-day:hover {
+  background: radial-gradient(circle at 50% 50%, rgba(139, 139, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 80%);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(139, 139, 255, 0.1);
+}
+
+.center-day.empty {
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+  min-height: auto;
+}
+
+.center-day-number {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* ======================================================== */
+/* ===== COLORS FOR THE CENTER PANEL ===== */
+/* ======================================================== */
+
+/* Friday = Purple */
+.center-day.friday .center-day-number {
+  color: #a78bfa !important;
+}
+
+/* Saturday = Blue */
+.center-day.saturday .center-day-number {
+  color: #60a5fa !important;
+}
+
+/* Sunday = Red */
+.center-day.sunday .center-day-number {
+  color: #f87171 !important;
+}
+
+/* ======================================================== */
+
+.center-day.today {
+  background: rgba(139, 139, 255, 0.2);
+  border: 1px solid var(--border-active);
+}
+
+.center-day.today .center-day-number {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.center-day-dots {
+  display: flex;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.center-day-dots .dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+.center-day-dots .event-dot {
+  background: var(--accent-color);
+  box-shadow: 0 0 8px rgba(139, 139, 255, 0.3);
+}
+
+.center-day-dots .holiday-dot {
+  background: #fbbf24;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .month-carousel-stage { grid-template-columns: 0fr 1fr 0fr; gap: 0; }
+  .side-month-card { display: none; }
+  .center-month-card { transform: scale(1); height: 88%; }
+  .center-month-label { font-size: 1.8rem; }
+}
+
+@media (max-width: 768px) {
+  .center-month-label { font-size: 1.6rem; }
+  .center-month-content { padding: 1rem; }
+  .month-nav-arrow { width: 32px; height: 32px; font-size: 0.8rem; }
+  .center-day-number { font-size: 1rem; }
+}

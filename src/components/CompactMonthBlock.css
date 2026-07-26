@@ -1,0 +1,101 @@
+/* src/components/CompactMonthBlock.css */
+.compact-month {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 0.5rem 0.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.compact-month-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  color: #e0e0f0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.2rem;
+}
+
+.compact-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  width: 100%;
+}
+
+.compact-day {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #d0d0e8;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.15s ease;
+}
+
+/* ===== GLOSSY HOVER EFFECT ON DATES ===== */
+.compact-day:hover {
+  background: radial-gradient(circle at 50% 50%, rgba(139, 139, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 80%);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(139, 139, 255, 0.1);
+  color: #e0e0ff;
+}
+
+/* Invisible padding cells */
+.compact-day.empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ===== PERFECT COLOR ALIGNMENT ===== */
+.compact-day.sunday {
+  color: var(--weekend-red) !important;
+}
+.compact-day.friday {
+  color: var(--weekend-purple) !important;
+}
+.compact-day.saturday {
+  color: var(--weekend-blue) !important;
+}
+
+.compact-day.other-month {
+  color: #4a4a5e !important;
+}
+
+/* Today highlight */
+.compact-day.compact-today {
+  background: rgba(139, 139, 255, 0.25);
+  color: #fff !important;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(139, 139, 255, 0.1);
+}
+
+/* Event and Holiday dots */
+.compact-event-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #8b8bff;
+  box-shadow: 0 0 6px rgba(139, 139, 255, 0.3);
+}
+
+.compact-holiday-dot {
+  position: absolute;
+  bottom: 1px;
+  left: 1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 6px rgba(251, 191, 36, 0.3);
+}

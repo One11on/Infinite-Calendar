@@ -1,0 +1,123 @@
+/* src/components/CalendarMonthView.css */
+.calendar-month-view {
+  background: rgba(20, 20, 35, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.month-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(139, 139, 255, 0.08);
+}
+
+.month-title {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #f0f0f0;
+  margin: 0;
+}
+
+.month-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.5rem;
+}
+
+.weekday-label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8a8aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0;
+}
+
+.month-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.day-cell {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.02);
+  position: relative;
+}
+
+.day-cell:hover {
+  background: rgba(139, 139, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.day-cell.empty {
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.day-cell .day-number {
+  font-size: 1rem;
+  color: #c0c0d0;
+}
+
+.day-cell.today {
+  background: rgba(139, 139, 255, 0.2);
+  border: 1px solid rgba(139, 139, 255, 0.3);
+}
+
+.day-cell.today .day-number {
+  color: #8b8bff;
+  font-weight: 700;
+}
+
+.day-dots {
+  display: flex;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.day-dots .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: block;
+}
+
+.day-dots .event-dot {
+  background: #8b8bff;
+  box-shadow: 0 0 8px rgba(139, 139, 255, 0.3);
+}
+
+.day-dots .holiday-dot {
+  background: #fbbf24;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .calendar-month-view {
+    padding: 1rem;
+  }
+  .month-title {
+    font-size: 1.2rem;
+  }
+  .day-cell .day-number {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,254 @@
+/* src/components/Header.css */
+.app-header {
+  flex-shrink: 0;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--border-light);
+  z-index: 20;
+  position: relative;
+  min-height: 64px;
+  transition: all 0.3s ease;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--gradient-1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== HOME BUTTON (Left) ===== */
+.header-left {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.glass-btn.small-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-btn.small-icon:hover {
+  background: rgba(139, 139, 255, 0.2);
+  border-color: rgba(139, 139, 255, 0.3);
+  transform: scale(1.04);
+}
+
+/* ===== CENTER WRAPPER ===== */
+.header-center-wrapper {
+  display: flex;
+  justify-content: center; /* Centers the gap perfectly */
+  flex: 1;
+  gap: 1rem;
+}
+
+/* ===== HOME PAGE: SEPARATE CAPSULES ===== */
+.home-capsule {
+  display: flex;
+  align-items: center;
+  background: rgba(10, 10, 20, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 0.3rem 1.2rem;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-capsule.hidden { display: none; }
+
+.header-date-title {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.header-date-title.visible { opacity: 1; }
+
+/* ===== DETAIL VIEW: SINGLE CONTINUOUS PILL ===== */
+.header-center-line {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: rgba(10, 10, 20, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 0.4rem 1.5rem;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-center-line.hidden { display: none; }
+
+/* ===== SEGMENTED CONTROLS ===== */
+.segmented-controls {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border-radius: 40px;
+  padding: 4px;
+  gap: 2px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.segmented-controls.visible { opacity: 1; transform: scale(1); pointer-events: auto; }
+.segmented-controls.hidden { opacity: 0; transform: scale(0.95); pointer-events: none; width: 0; padding: 0; overflow: hidden; }
+
+.segmented-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.segmented-btn:hover { color: var(--text-main); }
+.segmented-btn.active {
+  background: rgba(139, 139, 255, 0.2);
+  color: var(--accent-color);
+  box-shadow: 0 4px 12px rgba(139, 139, 255, 0.1);
+}
+
+/* ===== LIVE TIME ===== */
+.time-capsule {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.clock-hours-minutes {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-seconds {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+  align-self: flex-start;
+}
+
+/* ===== RIGHT: ACTIONS ===== */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 0 0 auto;
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  padding: 0.4rem 1rem;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.glass-btn:hover {
+  background: rgba(139, 139, 255, 0.2);
+  border-color: rgba(139, 139, 255, 0.3);
+  transform: scale(1.04);
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  transform: scale(1.08);
+}
+
+.action-btn.add-btn {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.action-btn.add-btn.visible { opacity: 1; transform: scale(1); pointer-events: auto; }
+.action-btn.add-btn.hidden { opacity: 0; transform: scale(0.8); pointer-events: none; width: 0; padding: 0; overflow: hidden; margin: 0; }
+
+.action-btn.menu-btn {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
+}
+.action-btn.menu-btn.visible { opacity: 1; transform: scale(1); pointer-events: auto; }
+.action-btn.menu-btn.hidden { opacity: 0; transform: scale(0.8); pointer-events: none; width: 0; padding: 0; overflow: hidden; margin: 0; }
+
+.theme-toggle {
+  font-size: 1.2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+.theme-toggle.visible { opacity: 1; pointer-events: auto; }
+.theme-toggle.hidden { opacity: 0; pointer-events: none; width: 0; padding: 0; overflow: hidden; margin: 0; }
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .app-header { padding: 0.6rem 0.8rem; min-height: 56px; }
+  .header-center-line { gap: 0.6rem; padding: 0.3rem 1rem; }
+  .header-date-title { font-size: 0.85rem; }
+  .segmented-btn { font-size: 0.6rem; padding: 0.2rem 0.8rem; }
+  .glass-btn.small-icon { width: 28px; height: 28px; font-size: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .header-center-line { flex-wrap: wrap; gap: 0.4rem; padding: 0.3rem 0.8rem; }
+  .header-date-title { font-size: 0.8rem; }
+  .glass-btn { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
+}

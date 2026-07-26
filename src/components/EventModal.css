@@ -1,0 +1,339 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-content {
+  background: rgba(20, 20, 35, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid rgba(139, 139, 255, 0.1);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(139, 139, 255, 0.2);
+  border-radius: 12px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(139, 139, 255, 0.08);
+}
+
+.modal-header h2 {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #e8e8f0;
+}
+
+.modal-close {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: #c0c0d0;
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.holidays-section h3,
+.events-section h3,
+.add-event-section h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #8a8aaa;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.holiday-item {
+  background: rgba(139, 139, 255, 0.05);
+  border-left: 3px solid #8b8bff;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.holiday-name {
+  color: #e8e8f0;
+  font-weight: 500;
+}
+
+.holiday-type {
+  color: #7a7a92;
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+
+.event-item {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid #8b8bff;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.event-title {
+  color: #e8e8f0;
+  font-weight: 500;
+}
+
+.event-description {
+  color: #7a7a92;
+  font-size: 0.8rem;
+}
+
+.event-delete {
+  background: rgba(255, 70, 70, 0.1);
+  border: none;
+  color: #f87171;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-delete:hover {
+  background: rgba(255, 70, 70, 0.2);
+}
+
+.no-events {
+  color: #5a5a72;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+}
+
+.add-event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.event-input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  color: #e8e8f0;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.event-input:focus {
+  outline: none;
+  border-color: rgba(139, 139, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.event-color-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #7a7a92;
+  font-size: 0.8rem;
+}
+
+.event-color-picker {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  padding: 2px;
+}
+
+.event-color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.event-color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+.event-add-btn {
+  background: rgba(139, 139, 255, 0.15);
+  border: 1px solid rgba(139, 139, 255, 0.2);
+  color: #8b8bff;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.event-add-btn:hover {
+  background: rgba(139, 139, 255, 0.25);
+  border-color: rgba(139, 139, 255, 0.3);
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 1.5rem;
+    width: 95%;
+    max-height: 90vh;
+  }
+}
+
+
+
+
+
+
+/* Notes Section Styles */
+.notes-section {
+  margin-bottom: 20px;
+}
+
+.notes-section h3 {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+.add-note-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.note-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.note-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.note-add-btn {
+  padding: 8px 16px;
+  background: #ffa94d;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.note-add-btn:hover {
+  opacity: 0.8;
+}
+
+.no-notes {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.note-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 169, 77, 0.08);
+  border-left: 3px solid #ffa94d;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.note-text {
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.note-delete {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0 4px;
+  transition: all 0.2s;
+}
+
+.note-delete:hover {
+  color: #ff453a;
+}

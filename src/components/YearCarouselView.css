@@ -1,0 +1,326 @@
+/* src/components/YearCarouselView.css */
+
+.carousel-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(5, 5, 12, 0.88); 
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+  padding: 1rem 1.5rem;
+}
+
+.carousel-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.carousel-container {
+  position: relative;
+  width: 96vw;
+  max-width: 1600px;
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* ===== MODERN FLOATING MINI HEADER ===== */
+.carousel-header-center {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 35;
+  
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  
+  background: rgba(12, 12, 22, 0.85);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  
+  padding: 0.35rem 0.5rem 0.35rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(139, 139, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  
+  transition: all 0.3s ease;
+}
+
+.carousel-date-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #e2e2ff;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  padding-right: 0.2rem;
+}
+
+/* Segmented Control */
+.carousel-segmented {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.carousel-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.25rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-btn:hover:not(.active) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.carousel-btn.active {
+  background: rgba(139, 139, 255, 0.28);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(139, 139, 255, 0.3);
+}
+
+/* Time Capsule */
+.carousel-time-capsule {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.carousel-hours-minutes {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.carousel-seconds {
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: rgba(139, 139, 255, 0.8);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* ===== CLOSE BUTTON ===== */
+.carousel-close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg) scale(1.05);
+}
+
+/* ===== STAGE & CARDS SYSTEM ===== */
+.carousel-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 2.3fr 1.15fr;
+  gap: 1.25rem;
+  align-items: stretch; /* Stretches cards equally */
+  padding-top: 2.2rem; /* Creates clean space for header */
+}
+
+.carousel-card {
+  height: 100%;
+  background: rgba(18, 18, 32, 0.75);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== SIDE CARDS ===== */
+.side-card {
+  opacity: 0.65;
+  transform: scale(0.97);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.side-card:not(.disabled-panel):hover {
+  opacity: 0.95;
+  transform: scale(0.99);
+  border-color: rgba(139, 139, 255, 0.25);
+  box-shadow: 0 10px 30px rgba(139, 139, 255, 0.1);
+}
+
+.side-card.disabled-panel {
+  cursor: default;
+  opacity: 0.25;
+}
+
+.side-content {
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-year-label {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.side-months-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr); /* Equal distribution across 4 rows */
+  gap: 0.6rem;
+  flex: 1; /* Fills remaining height evenly */
+}
+
+/* ===== CENTER CARD ===== */
+.center-card {
+  background: rgba(12, 12, 24, 0.92);
+  border: 1px solid rgba(139, 139, 255, 0.35);
+  box-shadow: 0 0 40px rgba(139, 139, 255, 0.12), 0 25px 60px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+.center-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-year-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(139, 139, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.center-year-label {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.nav-arrow.side-arrow {
+  background: rgba(139, 139, 255, 0.12);
+  border: 1px solid rgba(139, 139, 255, 0.25);
+  color: #ffffff;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.nav-arrow.side-arrow:hover:not(:disabled) {
+  background: rgba(139, 139, 255, 0.3);
+  transform: scale(1.08);
+}
+
+.nav-arrow.side-arrow:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  border-color: transparent;
+  background: transparent;
+}
+
+.center-months-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr); /* Equal distribution across 3 rows */
+  gap: 0.85rem;
+  flex: 1; /* Fills remaining height, removing empty bottom gap */
+}
+
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+@media (max-width: 1200px) {
+  .carousel-stage { 
+    grid-template-columns: 1fr 2fr 1fr; 
+    gap: 0.75rem; 
+  }
+}
+
+@media (max-width: 992px) {
+  .carousel-stage { grid-template-columns: 1fr; }
+  .side-card { display: none; } 
+  .center-months-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .center-months-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .center-content { padding: 1rem; }
+  .center-year-label { font-size: 1.6rem; }
+}
