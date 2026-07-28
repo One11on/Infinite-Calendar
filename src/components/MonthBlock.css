@@ -5,16 +5,21 @@
   border-radius: 10px;
   padding: 0.5rem 0.25rem 0.6rem;
   border: 1px solid rgba(255, 255, 255, 0.02);
-  transition: all 0.3s ease;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   min-width: 0;
   overflow: visible;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
 
+/* ===== MONTH HOVER - ONLY THIS SPECIFIC MONTH ZOOMS ===== */
 .month-mini:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(139, 139, 255, 0.08);
-  transform: scale(1.03);
+  transform: scale(1.08) translateZ(0);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(139, 139, 255, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(139, 139, 255, 0.05);
+  z-index: 2;
 }
 
 .month-mini .month-label {
@@ -43,19 +48,21 @@
   font-size: 0.5rem;
   color: #b0b0c8;
   border-radius: 4px;
-  transition: all 0.15s ease;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   font-weight: 400;
   position: relative;
   min-width: 0;
   min-height: 0;
+  z-index: 1;
 }
 
-/* ===== GLOSSY HOVER EFFECT ON DATES ===== */
+/* ===== DAY HOVER - ONLY THIS SPECIFIC DAY ZOOMS ===== */
 .day-mini:hover {
-  background: radial-gradient(circle at 50% 50%, rgba(139, 139, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 80%);
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(139, 139, 255, 0.1);
+  transform: scale(1.3) translateZ(0);
+  background: radial-gradient(circle at 50% 50%, rgba(139, 139, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 80%);
+  box-shadow: 0 0 30px rgba(139, 139, 255, 0.15);
   color: #e0e0ff;
+  z-index: 3;
 }
 
 /* ===== PERFECT COLOR ALIGNMENT ===== */
