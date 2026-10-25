@@ -44,7 +44,8 @@ function App() {
     setFocusedDate,
     goToPrevious,
     goToNext,
-    showWaterDrop
+    showWaterDrop,
+    restoreLastVisitedYear
   } = useCalendar();
 
   const hasScrolledToToday = useRef(false);
@@ -224,6 +225,8 @@ function App() {
         onHomeClick={() => {
           zoomOutFromYear();
           setViewType('year');
+          // ===== FIX: Restore last visited year (not the top) =====
+          restoreLastVisitedYear();
         }}
       />
       <div 

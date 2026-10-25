@@ -1,6 +1,6 @@
 // src/components/YearGrid.jsx
 import React from 'react';
-import YearBlock from './YearBlock';
+import LazyYearBlock from './LazyYearBlock';
 import ParticleBackground from './ParticleBackground';
 import './YearGrid.css';
 
@@ -12,13 +12,14 @@ export default function YearGrid({
   todayDate,
   onYearClick,
   onMonthClick,
-  onDayClick, // <--- RECEIVE THIS
+  onDayClick,
   onCloseYear,
   onScroll,
   isLoading,
   containerRef,
   events,
-  holidays
+  holidays,
+  waterDropTrigger
 }) {
   const gridClassName = `years-grid ${isZoomedToYear !== null ? 'zoomed' : ''}`;
 
@@ -26,11 +27,16 @@ export default function YearGrid({
     <div 
       className={gridClassName}
       onScroll={onScroll}
-      style={{ position: 'relative', zIndex: 1 }}
+      style={{ 
+        position: 'relative', 
+        zIndex: 1,
+        // FIX #3: Isolate layout calculations so scroll doesn't trigger full reflow
+        contain: 'layout style'
+      }}
     >
       <ParticleBackground />
       {yearsData.map((yearData) => (
-        <YearBlock
+        <LazyYearBlock
           key={yearData.year}
           yearData={yearData}
           todayYear={todayYear}
@@ -40,10 +46,11 @@ export default function YearGrid({
           isActive={yearData.year === isZoomedToYear}
           onClick={() => onYearClick(yearData.year)}
           onMonthClick={onMonthClick}
-          onDayClick={onDayClick} // <--- PASS IT DOWN HERE
+          onDayClick={onDayClick}
           onClose={onCloseYear}
           events={events}
           holidays={holidays}
+          waterDropTrigger={waterDropTrigger}
         />
       ))}
       {isLoading && (

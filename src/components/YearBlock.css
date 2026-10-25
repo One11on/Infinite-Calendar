@@ -7,8 +7,7 @@
   padding: 1.8rem 1.8rem 2rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  will-change: transform, border-color, background, box-shadow;
-  transform: translateZ(0);
+  /* FIX #3: Removed will-change & translateZ(0) - they were forcing GPU allocation for every block */
   animation: fadeInUp 0.5s ease forwards;
   position: relative;
   overflow: visible;
@@ -17,7 +16,7 @@
   min-height: 280px;
 }
 
-/* Glass shine effect - keep this but make it not trigger layout changes */
+/* Glass shine effect */
 .year-block::before {
   content: '';
   position: absolute;
@@ -49,9 +48,9 @@
   z-index: 0;
 }
 
-/* ===== HOVER EFFECT - ONLY THIS SPECIFIC YEAR BLOCK ZOOMS ===== */
+/* ===== HOVER EFFECT ===== */
 .year-block:hover {
-  transform: scale(1.03) translateZ(0);
+  transform: scale(1.03);
   border-color: rgba(139, 139, 255, 0.2);
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(139, 139, 255, 0.05);
@@ -98,7 +97,7 @@
   box-shadow: 0 0 30px rgba(139, 139, 255, 0.03);
 }
 
-/* ---- ZOOMED STATE - Active Year ---- */
+/* ---- ZOOMED STATE ---- */
 .years-grid.zoomed .year-block:not(.active-year) {
   opacity: 0.15;
   transform: scale(0.92) !important;
@@ -120,7 +119,6 @@
   min-height: 400px;
 }
 
-/* Disable hover transform when zoomed */
 .years-grid.zoomed .year-block.active-year:hover {
   transform: scale(1.04) !important;
 }
@@ -129,7 +127,6 @@
   transform: scale(0.92) !important;
 }
 
-/* Glow effect on active year */
 .years-grid.zoomed .year-block.active-year::before {
   opacity: 1;
   background: radial-gradient(circle at 50% 50%, rgba(139, 139, 255, 0.08) 0%, transparent 70%);
@@ -175,21 +172,10 @@
   border-radius: 6px;
 }
 
-.years-grid.zoomed .year-block.active-year .day-mini.friday {
-  color: #a78bfa;
-}
-
-.years-grid.zoomed .year-block.active-year .day-mini.saturday {
-  color: #60a5fa;
-}
-
-.years-grid.zoomed .year-block.active-year .day-mini.sunday {
-  color: #f87171;
-}
-
-.years-grid.zoomed .year-block.active-year .day-mini.other-month {
-  color: #4a4a5e;
-}
+.years-grid.zoomed .year-block.active-year .day-mini.friday { color: #a78bfa; }
+.years-grid.zoomed .year-block.active-year .day-mini.saturday { color: #60a5fa; }
+.years-grid.zoomed .year-block.active-year .day-mini.sunday { color: #f87171; }
+.years-grid.zoomed .year-block.active-year .day-mini.other-month { color: #4a4a5e; }
 
 .years-grid.zoomed .year-block.active-year .day-mini.today {
   background: rgba(139, 139, 255, 0.25);
@@ -197,7 +183,7 @@
   box-shadow: 0 0 30px rgba(139, 139, 255, 0.1);
 }
 
-/* Close button on active year */
+/* Close button */
 .year-block .close-year-btn {
   position: absolute;
   top: 1rem;
@@ -228,7 +214,7 @@
   display: flex;
 }
 
-/* ---- Month Hover Effect - Only specific month zooms ---- */
+/* ---- Hover Effects ---- */
 .month-mini {
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, border-color 0.3s ease;
   position: relative;
@@ -236,18 +222,16 @@
 }
 
 .month-mini:hover {
-  transform: scale(1.08) translateZ(0);
+  transform: scale(1.08);
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(139, 139, 255, 0.2);
   z-index: 2;
 }
 
-/* Disable month hover when zoomed year is active */
 .years-grid.zoomed .year-block.active-year .month-mini:hover {
   transform: scale(1.03);
 }
 
-/* ---- Day Hover Effect - Only specific day zooms ---- */
 .day-mini {
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, color 0.2s ease;
   position: relative;
@@ -255,14 +239,13 @@
 }
 
 .day-mini:hover {
-  transform: scale(1.25) translateZ(0);
+  transform: scale(1.25);
   background: radial-gradient(circle at 50% 50%, rgba(139, 139, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 80%);
   box-shadow: 0 0 25px rgba(139, 139, 255, 0.15);
   color: #e0e0ff;
   z-index: 3;
 }
 
-/* Disable day hover when zoomed year is active */
 .years-grid.zoomed .year-block.active-year .day-mini:hover {
   transform: scale(1.15);
 }

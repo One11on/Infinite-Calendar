@@ -10,6 +10,8 @@
   padding: 0.5rem;
   position: relative;
   z-index: 1;
+  /* FIX #3: Isolate layout so scroll doesn't recalculate the whole page */
+  contain: layout style;
 }
 
 .years-grid .year-block {

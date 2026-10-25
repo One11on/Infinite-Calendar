@@ -1,6 +1,5 @@
 // src/hooks/useCalendar.js
 import { useState, useCallback, useRef, useEffect } from 'react';
-import SmoothScroll from 'smooth-scroll';
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
@@ -8,17 +7,11 @@ const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
 
 function getDayClass(dayOfWeek, isOtherMonth) {
   if (isOtherMonth) return 'other-month';
-  if (dayOfWeek === 5) return 'friday';    // Purple
-  if (dayOfWeek === 6) return 'saturday';  // Blue
-  if (dayOfWeek === 0) return 'sunday';    // Red
+  if (dayOfWeek === 5) return 'friday';
+  if (dayOfWeek === 6) return 'saturday';
+  if (dayOfWeek === 0) return 'sunday';
   return '';
 }
-
-const scroll = new SmoothScroll('a[href*="#"]', {
-  speed: 800,
-  speedAsDuration: true,
-  easing: 'easeInOutCubic',
-});
 
 export function useCalendar() {
   const today = new Date();
@@ -34,6 +27,9 @@ export function useCalendar() {
   const [focusedDate, setFocusedDate] = useState(new Date()); 
 
   const [isZoomedToYear, setIsZoomedToYear] = useState(null);
+
+  // ===== FIX: Remember last visited year for Home button =====
+  const [lastVisitedYear, setLastVisitedYear] = useState(todayYear);
   
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState(null);
@@ -67,29 +63,41 @@ export function useCalendar() {
     if (!containerRef.current) return;
     const yearBlock = containerRef.current.querySelector(`[data-year="${year}"]`);
     if (yearBlock) {
-      scroll.animateScroll(yearBlock, { speed: 800, easing: 'easeInOutCubic' });
+      yearBlock.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
     }
   }, []);
 
   const goToToday = useCallback(() => {
     const now = new Date();
+    
     setFocusedDate(now);
-
     setShowWaterDrop(true);
+
     if (waterDropTimerRef.current) clearTimeout(waterDropTimerRef.current);
     waterDropTimerRef.current = setTimeout(() => {
       setShowWaterDrop(false);
       waterDropTimerRef.current = null;
     }, 800);
 
-    if (viewType === 'year') {
-      setIsZoomedToYear(null);
-      const yearCount = endYear - startYear + 1;
-      const half = Math.floor(yearCount / 2);
-      setStartYear(todayYear - half);
-      setEndYear(todayYear + (yearCount - half - 1));
-      scrollToYear(todayYear);
-    }
+    requestAnimationFrame(() => {
+      if (viewType === 'year') {
+        setIsZoomedToYear(null);
+        
+        const yearCount = endYear - startYear + 1;
+        const half = Math.floor(yearCount / 2);
+        
+        setStartYear(todayYear - half);
+        setEndYear(todayYear + (yearCount - half - 1));
+        setLastVisitedYear(todayYear);
+        
+        requestAnimationFrame(() => {
+          scrollToYear(todayYear);
+        });
+      }
+    });
   }, [viewType, startYear, endYear, todayYear, scrollToYear]);
 
   // === LOCATION & HOLIDAYS ===
@@ -220,17 +228,32 @@ export function useCalendar() {
     return yearsData;
   }, [startYear, endYear, generateYearData]);
 
-  // ===== ZOOM IN =====
+  // ===== ZOOM IN: Save the year the user clicked =====
   const zoomIntoYear = useCallback((year) => {
+    setLastVisitedYear(year); // <-- REMEMBER THIS
     setIsZoomedToYear(year);
-    setTimeout(() => { scrollToYear(year); }, 100);
+    requestAnimationFrame(() => {
+      scrollToYear(year);
+    });
   }, [scrollToYear]);
 
-  // ===== ZOOM OUT (NO SCROLL AT ALL - PURE CLOSE) =====
   const zoomOutFromYear = useCallback(() => {
     setIsZoomedToYear(null);
-    // ==== NOTHING ELSE. NO SCROLL, NO JUMP, NO MOVE ====
   }, []);
+
+  // ===== NEW: Restore last visited year for Home button =====
+  const restoreLastVisitedYear = useCallback(() => {
+    // Recenter grid around last visited year, then scroll to it
+    const yearCount = endYear - startYear + 1;
+    const half = Math.floor(yearCount / 2);
+    
+    setStartYear(lastVisitedYear - half);
+    setEndYear(lastVisitedYear + (yearCount - half - 1));
+    
+    requestAnimationFrame(() => {
+      scrollToYear(lastVisitedYear);
+    });
+  }, [lastVisitedYear, startYear, endYear, scrollToYear]);
 
   const shiftYears = useCallback((delta) => {
     if (isZoomedToYear !== null) return;
@@ -270,6 +293,9 @@ export function useCalendar() {
     loadMoreYears, setIsLoading, scrollToYear, addEvent, removeEvent,
     setSelectedDate, setShowEventModal, setCountryCode,
     viewType, setViewType, focusedDate, setFocusedDate, goToPrevious, goToNext,
-    showWaterDrop
+    showWaterDrop,
+    // ===== NEW EXPORTS =====
+    lastVisitedYear,
+    restoreLastVisitedYear
   };
 }

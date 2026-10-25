@@ -12,6 +12,7 @@ export default function LazyYearBlock({
   isActive,
   onClick,
   onMonthClick,
+  onDayClick,
   onClose,
   events,
   holidays,
@@ -33,7 +34,11 @@ export default function LazyYearBlock({
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" }
+      { 
+        // FIX #3: Increased from 200px to 800px
+        // Preloads months BEFORE user reaches them → no React re-render during scroll
+        rootMargin: "800px" 
+      }
     );
 
     if (containerRef.current) {
@@ -55,6 +60,10 @@ export default function LazyYearBlock({
       className={`year-block ${isActive ? 'active-year' : ''} ${yearData.year === todayYear ? 'today-year' : ''}`}
       data-year={yearData.year}
       onClick={handleClick}
+      style={{ 
+        // FIX #3: Isolate layout so this block's render doesn't affect the grid
+        contain: 'layout style paint'
+      }}
     >
       {isActive && (
         <button 
@@ -69,7 +78,6 @@ export default function LazyYearBlock({
       )}
       <div className="year-label">{yearData.year}</div>
       <div className="months-row">
-        {/* Only render months if near screen, otherwise just an empty space */}
         {(isVisible || isActive) && (
           yearData.months.map((month, index) => (
             <MonthBlock
@@ -80,6 +88,7 @@ export default function LazyYearBlock({
               todayMonth={todayMonth}
               todayDate={todayDate}
               onMonthClick={onMonthClick}
+              onDayClick={onDayClick}
               events={events}
               holidays={holidays}
               waterDropTrigger={waterDropTrigger} 
