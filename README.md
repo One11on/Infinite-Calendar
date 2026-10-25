@@ -34,8 +34,8 @@
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/unlimited-calendar.git
-   cd unlimited-calendar
+   git clone https://github.com/One11on/Infinite-Calendar.git
+   cd Infinite-Calendar
    npm install
    npm install date-fns
    npm install smooth-scroll
